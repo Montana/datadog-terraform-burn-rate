@@ -26,7 +26,7 @@ Then you should pick a few latency buckets for example:
 - 500ms
 - 1000ms
 
-![Hits](APM_Generate_Metrics_lt250ms.png)
+![APM_Generate_Metrics_lt250ms](https://user-images.githubusercontent.com/20936398/200920031-08d2e724-bbf8-48b1-8826-f0a9fc1ad908.png)
 
 Based on these buckets and also the hits metric we generate our Latency SLO.
 

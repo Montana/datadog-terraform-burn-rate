@@ -12,7 +12,7 @@ There is also some backwards compatibility if you want to use generated metrics 
 Before datadog supported latency SLO's we used generated metrics to base our SLO's on.
 Creating the generated metrics is not something you can do with Terraform.
 You'll have to create these metrics by hand if you need/want this.
-
+f
 In Datadog go to APM -> Setup and Configuration -> Generate Metrics -> New Metric
 
 First create this one
@@ -36,6 +36,12 @@ Other modules can be found on the [Terraform Registry](https://registry.terrafor
 We have two base modules we use to standardise development of our Monitor Modules:
 - [generic monitor](https://github.com/kabisa/terraform-datadog-generic-monitor) Used in 90% of our alerts
 - [service check monitor](https://github.com/kabisa/terraform-datadog-service-check-monitor)
+
+| BURN RATE | LONG WINDOW | SHORT WINDOW | THEORETICAL ERROR BUDGET CONSUMED |
+|-----------|-------------|--------------|-----------------------------------|
+| 14.4      | 1 hour      | 5 minutes    | 2%                                |
+| 6         | 6 hours     | 30 minutes   | 5%                                |
+| 3         | 24 hours    | 120 minutes  | 10%                               |
 
 Modules are generated with this tool: https://github.com/kabisa/datadog-terraform-generator
 
@@ -265,22 +271,17 @@ avg(last_30m):sum:trace.${var.trace_span_name}.hits{tag:xxx}.as_rate() >
 
 ## Module Variables
 
-| variable                        | default      | required | description                                                                                          |
-|---------------------------------|--------------|----------|------------------------------------------------------------------------------------------------------|
-| env                             |              | Yes      |                                                                                                      |
-| service                         |              | Yes      |                                                                                                      |
-| service_display_name            | None         | No       |                                                                                                      |
-| trace_span_name                 | http.request | No       | Traces contain a span name. Example:
-  trace.<SPAN_NAME>.<METRIC_SUFFIX>
-  trace.<SPAN_NAME>.<METRIC_SUFFIX>.<2ND_PRIM_TAG>_service
+| BURN RATE | LONG WINDOW | SHORT WINDOW | THEORETICAL ERROR BUDGET CONSUMED |
+|-----------|-------------|--------------|-----------------------------------|
+| 16.8      | 1 hour      | 5 minutes    | 10%                               |
+| 5.6       | 6 hours     | 30 minutes   | 20%                               |
+| 2.8       | 24 hours    | 120 minutes  | 40%                               |
 
-The name of the operation or span.name (examples: redis.command, pylons.request, rails.request, mysql.query
-https://docs.datadoghq.com/tracing/guide/metrics_namespace/ |
-| notification_channel            |              | Yes      |                                                                                                      |
-| additional_tags                 | []           | No       |                                                                                                      |
-| name_prefix                     | ""           | No       |                                                                                                      |
-| name_suffix                     | ""           | No       |                                                                                                      |
-| locked                          | True         | No       |                                                                                                      |
-| latency_excluded_resource_names | []           | No       | List of resource names to exclude in latency oriented monitors or SLOs. Some requests might be batch requests |
-| filters_str_override            | None         | No       |                                                                                                      |
 
+## 90 Day Burn Rate
+
+| BURN RATE | LONG WINDOW | SHORT WINDOW | THEORETICAL ERROR BUDGET CONSUMED |
+|-----------|-------------|--------------|-----------------------------------|
+| 21.6      | 1 hour      | 5 minutes    | 1%                                |
+| 10.8      | 6 hours     | 30 minutes   | 3%                                |
+| 4.5       | 24 hours    | 120 minutes  | 5%                                |

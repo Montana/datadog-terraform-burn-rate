@@ -16,7 +16,7 @@ You'll have to create these metrics by hand if you need/want this.
 In Datadog go to APM -> Setup and Configuration -> Generate Metrics -> New Metric
 
 First create this one
-![Hits](APM_Generate_Metrics_Hits.png)
+![APM_Generate_Metrics_Hits](https://user-images.githubusercontent.com/20936398/200920167-7c1fc86f-a01a-4d0d-a03a-51d707453527.png)
 
 Based on this hits metric we create our Errors SLO
 

@@ -1,6 +1,6 @@
 [//]: # (This file is generated. Do not edit, module description can be added by editing / creating module_description.md)
 
-# Terraform module for Datadog Apm
+# Terraform module for Datadog APM
 
 This module provides SLO's and other alerts based on APM data.
 Note that it's this module's opinion that you should prefer to alert on SLO burn rates in stead of latency thresholds.
